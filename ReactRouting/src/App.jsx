@@ -1,19 +1,36 @@
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import Home from "./Home";
-import About from "./About";
-import Contact from "./Contact";
-import Nav from "./Nav";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import Home from "./components/Home";
+import Contact from "./components/Contact";
+import AboutUs from "./components/AboutUs";
+import Dashboard from "./components/Dashboard";
+import Profile from "./components/Profile";
+import Settings from "./components/Settings";
 
-export default function App() {
+function App() {
   return (
-    <>
-      <Nav />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="*" element={<h1>PageNot Found</h1>} />
-      </Routes>
-    </>
+    <Router>
+      {/* browserRouter */}
+      <div className="min-h-screen bg-gray-100 text-gray-800">
+        <Navbar />
+
+        <div className="p-6">
+          <Routes>
+            {/* Normal Routes */}
+            <Route path="/" element={<Home />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/about" element={<AboutUs />} />
+
+            {/* Nested Routes inside Dashboard */}
+            <Route path="/dashboard" element={<Dashboard />}>
+              <Route path="profile" element={<Profile />} />
+              <Route path="settings" element={<Settings />} />
+            </Route>
+          </Routes>
+        </div>
+      </div>
+    </Router>
   );
 }
+
+export default App;
